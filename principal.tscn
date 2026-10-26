@@ -1,0 +1,143 @@
+[gd_scene format=3 uid="uid://cjfmf7x6wrtya"]
+
+[ext_resource type="Script" uid="uid://b3c3cbrhvvu2g" path="res://principal.gd" id="1_emcp4"]
+[ext_resource type="Script" uid="uid://brby1cposnjkb" path="res://character_body_2d.gd" id="1_m7tbw"]
+[ext_resource type="Texture2D" uid="uid://dm02hwbo6js51" path="res://icon.svg" id="1_tr6oq"]
+[ext_resource type="Script" uid="uid://dhr0bsmvh808w" path="res://area_2d.gd" id="3_rrtif"]
+[ext_resource type="Script" uid="uid://b4b1gd6jq6qa0" path="res://label.gd" id="4_7cuts"]
+[ext_resource type="Script" uid="uid://bcvkbchw8mlaw" path="res://temporizador_caducidad.gd" id="6_ep5lw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3l2vh"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m7tbw"]
+size = Vector2(1280, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_02j6r"]
+size = Vector2(1280, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rrtif"]
+size = Vector2(20, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7cuts"]
+size = Vector2(20, 720)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3l2vh"]
+radius = 20.0
+
+[node name="Node2D" type="Node2D" unique_id=1350751593]
+script = ExtResource("1_emcp4")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1823054147]
+z_index = -1
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.26854116, 0.32529348, 0.26848784, 1)
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=770867029]
+position = Vector2(640, 360)
+script = ExtResource("1_m7tbw")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1901022739]
+position = Vector2(2.2888184e-05, 3.8146973e-06)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_tr6oq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=798721894]
+scale = Vector2(2, 2)
+shape = SubResource("RectangleShape2D_3l2vh")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1180341762]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=739401695]
+position = Vector2(640, 10)
+shape = SubResource("RectangleShape2D_m7tbw")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D" unique_id=1488682748]
+position = Vector2(640, 710)
+shape = SubResource("RectangleShape2D_02j6r")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=796554025]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=1578356129]
+position = Vector2(10, 360)
+shape = SubResource("RectangleShape2D_rrtif")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D2" unique_id=2094004624]
+position = Vector2(1270, 360)
+shape = SubResource("RectangleShape2D_7cuts")
+
+[node name="Fruta1" type="Area2D" parent="." unique_id=1813949500 groups=["alimentos"]]
+position = Vector2(350, 250)
+script = ExtResource("3_rrtif")
+dias_para_caducar = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Fruta1" unique_id=993625742]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_tr6oq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fruta1" unique_id=1356451296]
+shape = SubResource("CircleShape2D_3l2vh")
+
+[node name="Label" type="Label" parent="Fruta1" unique_id=1229301852]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Días: 1"
+
+[node name="Area2D2" type="Area2D" parent="." unique_id=1381949402 groups=["alimentos"]]
+position = Vector2(900, 250)
+script = ExtResource("3_rrtif")
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D2" unique_id=821671603]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_tr6oq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" unique_id=1133127632]
+shape = SubResource("CircleShape2D_3l2vh")
+
+[node name="Label" type="Label" parent="Area2D2" unique_id=497313211]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Días: 3"
+
+[node name="Label" type="Label" parent="." unique_id=658052706]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 92.0
+offset_bottom = 43.0
+text = "Puntos: 0"
+script = ExtResource("4_7cuts")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1381504428]
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=1353421683]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -70.0
+offset_top = 30.0
+offset_right = 70.0
+offset_bottom = 53.0
+grow_horizontal = 2
+text = "Mensaje del juego"
+horizontal_alignment = 1
+
+[node name="LabelPedido" type="Label" parent="." unique_id=1003757450]
+offset_left = 20.0
+offset_top = 60.0
+offset_right = 312.0
+offset_bottom = 83.0
+text = "PEDIDO: Rescata 2 alimentos vigentes"
+
+[node name="TemporizadorCaducidad" type="Timer" parent="." unique_id=873969786]
+wait_time = 30.0
+autostart = true
+script = ExtResource("6_ep5lw")
+
+[node name="BotonNuevaPartida" type="Button" parent="." unique_id=2076187097]
+offset_left = 1100.0
+offset_top = 20.0
+offset_right = 1218.0
+offset_bottom = 51.0
+text = "Nueva Partida"

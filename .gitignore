@@ -1,0 +1,7 @@
+# Archivos temporales de Godot
+.godot/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+desktop.ini
