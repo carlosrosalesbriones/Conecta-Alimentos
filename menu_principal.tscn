@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://v5vqelp61k7j"]
+
+[ext_resource type="Script" uid="uid://di6n6f616hpb3" path="res://menu_principal.gd" id="1_bj1uy"]
+
+[node name="MenuPrincipal" type="Control" unique_id=1243369168]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bj1uy")
+
+[node name="Fondo" type="ColorRect" parent="." unique_id=641782525]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.13725491, 0.25490198, 0.1882353, 1)
+
+[node name="TituloJuego" type="Label" parent="." unique_id=1370226599]
+layout_mode = 0
+offset_left = 240.0
+offset_top = 100.0
+offset_right = 1040.0
+offset_bottom = 200.0
+theme_override_font_sizes/font_size = 48
+text = "CONECTA ALIMENTOS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BotonJugar" type="Button" parent="." unique_id=19495358]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 300.0
+offset_right = 790.0
+offset_bottom = 365.0
+theme_override_font_sizes/font_size = 24
+text = "JUGAR"
+
+[node name="BotonInstrucciones" type="Button" parent="." unique_id=941238911]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 390.0
+offset_right = 790.0
+offset_bottom = 455.0
+text = "INSTRUCCIONES"
+
+[node name="BotonCreditos" type="Button" parent="." unique_id=1763399530]
+layout_mode = 0
+offset_left = 490.0
+offset_top = 480.0
+offset_right = 790.0
+offset_bottom = 545.0
+text = "CÉDITOS"
+
+[node name="PanelInstrucciones" type="Panel" parent="." unique_id=1902083151]
+visible = false
+custom_minimum_size = Vector2(500, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -283.0
+offset_right = 250.0
+offset_bottom = 283.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TituloInstrucciones" type="Label" parent="PanelInstrucciones" unique_id=1202693824]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 20.0
+offset_right = 470.0
+offset_bottom = 70.0
+text = "¿CÓMO JUGAR?"
+
+[node name="TextoInstrucciones" type="Label" parent="PanelInstrucciones" unique_id=293282979]
+custom_minimum_size = Vector2(440, 250)
+layout_mode = 0
+offset_left = 30.0
+offset_top = 85.0
+offset_right = 470.0
+offset_bottom = 524.0
+text = "OBJETIVO:
+Rescata al menos 3 alimentos para completar el pedido.
+
+MECÁNICAS:
+• Muévete por el escenario para recoger alimentos.
+• Cada alimento rescatado otorga 10 puntos.
+• Los alimentos tienen diferentes tiempos de caducidad.
+• Recoger un alimento caducado te hace perder una vida.
+• Comienza con 3 vidas.
+
+DINERO:
+• Completar un pedido te recompensa con $100.
+• Utiliza el dinero para comprar vidas adicionales.
+
+IMPORTANTE:
+• Tienes 60 segundos para completar el nivel.
+• Si pierdes todas tus vidas o se acaba el tiempo, pierdes."
+autowrap_mode = 2
+
+[node name="BotonVolver" type="Button" parent="PanelInstrucciones" unique_id=378870687]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -34.5
+offset_top = 15.0
+offset_right = 34.5
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "VOLVER"

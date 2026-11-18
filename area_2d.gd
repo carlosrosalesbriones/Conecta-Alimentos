@@ -1,6 +1,7 @@
 extends Area2D
 
 @export var dias_para_caducar: int = 3
+var penalizacion_aplicada: bool = false
 
 func esta_caducado() -> bool:
 	return dias_para_caducar <= 0
@@ -11,7 +12,10 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:
 		if esta_caducado():
-			get_tree().current_scene.mostrar_mensaje("¡Este alimento está caducado!")
+			if not penalizacion_aplicada:
+				get_tree().current_scene.mostrar_mensaje("¡Este alimento está caducado! -1 vida")
+				GameManager.perder_vida()
+				penalizacion_aplicada = true
 			return
 
 		get_tree().current_scene.mostrar_mensaje("¡Alimento rescatado! +10 puntos")

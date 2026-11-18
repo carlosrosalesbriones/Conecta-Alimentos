@@ -67,38 +67,89 @@ shape = SubResource("RectangleShape2D_rrtif")
 position = Vector2(1270, 360)
 shape = SubResource("RectangleShape2D_7cuts")
 
-[node name="Fruta1" type="Area2D" parent="." unique_id=1813949500 groups=["alimentos"]]
+[node name="Alimento1" type="Area2D" parent="." unique_id=1813949500 groups=["alimentos"]]
 position = Vector2(350, 250)
 script = ExtResource("3_rrtif")
 dias_para_caducar = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="Fruta1" unique_id=993625742]
+[node name="Sprite2D" type="Sprite2D" parent="Alimento1" unique_id=993625742]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_tr6oq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Fruta1" unique_id=1356451296]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Alimento1" unique_id=1356451296]
 shape = SubResource("CircleShape2D_3l2vh")
 
-[node name="Label" type="Label" parent="Fruta1" unique_id=1229301852]
+[node name="Label" type="Label" parent="Alimento1" unique_id=1229301852]
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Días: 1"
 
-[node name="Area2D2" type="Area2D" parent="." unique_id=1381949402 groups=["alimentos"]]
+[node name="Alimento2" type="Area2D" parent="." unique_id=1381949402 groups=["alimentos"]]
 position = Vector2(900, 250)
 script = ExtResource("3_rrtif")
 
-[node name="Sprite2D" type="Sprite2D" parent="Area2D2" unique_id=821671603]
+[node name="Sprite2D" type="Sprite2D" parent="Alimento2" unique_id=821671603]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_tr6oq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2" unique_id=1133127632]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Alimento2" unique_id=1133127632]
 shape = SubResource("CircleShape2D_3l2vh")
 
-[node name="Label" type="Label" parent="Area2D2" unique_id=497313211]
+[node name="Label" type="Label" parent="Alimento2" unique_id=497313211]
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Días: 3"
+
+[node name="Alimento3" type="Area2D" parent="." unique_id=759769291 groups=["alimentos"]]
+position = Vector2(797, 552)
+script = ExtResource("3_rrtif")
+
+[node name="Sprite2D" type="Sprite2D" parent="Alimento3" unique_id=1252452420]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_tr6oq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Alimento3" unique_id=2084867024]
+shape = SubResource("CircleShape2D_3l2vh")
+
+[node name="Label" type="Label" parent="Alimento3" unique_id=459319930]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Días: 3"
+metadata/_edit_use_anchors_ = true
+
+[node name="Alimento4" type="Area2D" parent="." unique_id=1749248952 groups=["alimentos"]]
+position = Vector2(233, 586)
+script = ExtResource("3_rrtif")
+
+[node name="Sprite2D" type="Sprite2D" parent="Alimento4" unique_id=1089671489]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_tr6oq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Alimento4" unique_id=148243638]
+shape = SubResource("CircleShape2D_3l2vh")
+
+[node name="Label" type="Label" parent="Alimento4" unique_id=1468766392]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Días: 3"
+metadata/_edit_use_anchors_ = true
+
+[node name="Alimento5" type="Area2D" parent="." unique_id=983995023 groups=["alimentos"]]
+position = Vector2(100, 157)
+script = ExtResource("3_rrtif")
+
+[node name="Sprite2D" type="Sprite2D" parent="Alimento5" unique_id=110995733]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_tr6oq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Alimento5" unique_id=1362784654]
+shape = SubResource("CircleShape2D_3l2vh")
+
+[node name="Label" type="Label" parent="Alimento5" unique_id=1105443634]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Días: 3"
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="." unique_id=658052706]
 offset_left = 20.0
@@ -123,12 +174,97 @@ grow_horizontal = 2
 text = "Mensaje del juego"
 horizontal_alignment = 1
 
+[node name="LabelVidas" type="Label" parent="CanvasLayer" unique_id=166866975]
+offset_left = 581.0
+offset_top = 67.0
+offset_right = 641.0
+offset_bottom = 90.0
+text = "Vidas: 3"
+
+[node name="LabelTiempo" type="Label" parent="CanvasLayer" unique_id=404381839]
+offset_left = 597.0
+offset_top = 93.0
+offset_right = 682.0
+offset_bottom = 116.0
+text = "Tiempo: 60"
+
+[node name="LabelDinero" type="Label" parent="CanvasLayer" unique_id=630572497]
+offset_left = 940.0
+offset_top = 23.0
+offset_right = 1020.0
+offset_bottom = 46.0
+text = "Dinero: $0"
+
+[node name="BotonComprarVida" type="Button" parent="CanvasLayer" unique_id=1929335256]
+offset_left = 1099.0
+offset_top = 76.0
+offset_right = 1263.0
+offset_bottom = 107.0
+text = "Comprar vida ($100)
+"
+
+[node name="ContenedorResultados" type="Control" parent="CanvasLayer" unique_id=1319348213]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PanelResultados" type="Panel" parent="CanvasLayer/ContenedorResultados" unique_id=1458323693]
+visible = false
+layout_mode = 0
+offset_left = 390.0
+offset_top = 185.0
+offset_right = 890.0
+offset_bottom = 535.0
+
+[node name="LabelTituloResultado" type="Label" parent="CanvasLayer/ContenedorResultados/PanelResultados" unique_id=479609597]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 45.0
+offset_right = 450.0
+offset_bottom = 85.0
+theme_override_font_sizes/font_size = 28
+text = "Resultado"
+horizontal_alignment = 1
+
+[node name="LabelPuntosFinales" type="Label" parent="CanvasLayer/ContenedorResultados/PanelResultados" unique_id=1438811263]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 140.0
+offset_right = 450.0
+offset_bottom = 180.0
+theme_override_font_sizes/font_size = 20
+text = "Puntos: 0"
+horizontal_alignment = 1
+
+[node name="LabelDineroFinal" type="Label" parent="CanvasLayer/ContenedorResultados/PanelResultados" unique_id=187468784]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 195.0
+offset_right = 450.0
+offset_bottom = 235.0
+theme_override_font_sizes/font_size = 20
+text = "Dinero: $0"
+horizontal_alignment = 1
+
+[node name="BotonReiniciar" type="Button" parent="CanvasLayer/ContenedorResultados/PanelResultados" unique_id=1231783098]
+process_mode = 3
+layout_mode = 0
+offset_left = 150.0
+offset_top = 270.0
+offset_right = 350.0
+offset_bottom = 315.0
+text = "Nueva Partida"
+
 [node name="LabelPedido" type="Label" parent="." unique_id=1003757450]
 offset_left = 20.0
 offset_top = 60.0
 offset_right = 312.0
 offset_bottom = 83.0
-text = "PEDIDO: Rescata 2 alimentos vigentes"
+text = "PEDIDO: Rescata 3 alimentos vigentes"
 
 [node name="TemporizadorCaducidad" type="Timer" parent="." unique_id=873969786]
 wait_time = 30.0
@@ -136,8 +272,13 @@ autostart = true
 script = ExtResource("6_ep5lw")
 
 [node name="BotonNuevaPartida" type="Button" parent="." unique_id=2076187097]
+process_mode = 3
 offset_left = 1100.0
 offset_top = 20.0
 offset_right = 1218.0
 offset_bottom = 51.0
 text = "Nueva Partida"
+
+[node name="TemporizadorNivel" type="Timer" parent="." unique_id=383114499]
+wait_time = 60.0
+one_shot = true

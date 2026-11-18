@@ -5,6 +5,9 @@ var dia_actual: int = 1
 var alimentos_rescatados: int = 0
 var dinero: int = 0
 var pedido_pagado: bool = false
+var vidas: int = 3
+var compras_vidas: int = 0
+var precios_vidas: Array[int] = [100, 250, 500, 850, 1300]
 
 func sumar_puntos(cantidad: int) -> void:
 	puntos += cantidad
@@ -12,11 +15,23 @@ func sumar_puntos(cantidad: int) -> void:
 func avanzar_dia() -> void:
 	dia_actual += 1
 	guardar_partida()
+
+func perder_vida() -> void:
+	if vidas <= 0:
+		return
+
+	vidas -= 1
+	print("Vidas restantes: ", vidas)
+
+	if vidas == 0:
+		get_tree().current_scene.terminar_nivel("¡Te has quedado sin vidas! Nivel perdido")
+
 func actualizar_alimentos() -> void:
+	print("Alimentos encontrados: ", get_tree().get_nodes_in_group("alimentos").map(func(a): return a.name))
 	for alimento in get_tree().get_nodes_in_group("alimentos"):
 		alimento.actualizar_caducidad()
 func pedido_completado() -> bool:
-	return alimentos_rescatados >= 2
+	return alimentos_rescatados >= 3
 
 func comprobar_pedido() -> void:
 	if pedido_completado() and not pedido_pagado:
@@ -81,15 +96,37 @@ func reiniciar_partida() -> void:
 	dia_actual = 1
 	alimentos_rescatados = 0
 	pedido_pagado = false
+	vidas = 3
+	compras_vidas = 0
 
 	for alimento in get_tree().get_nodes_in_group("alimentos"):
-		if alimento.name == "Fruta1":
-			alimento.dias_para_caducar = 1
-		else:
-			alimento.dias_para_caducar = 3
+		alimento.dias_para_caducar = randi_range(1, 3)
 
 		var etiqueta = alimento.get_node_or_null("Label")
 		if etiqueta != null:
 			etiqueta.text = "Días: " + str(alimento.dias_para_caducar)
 
 	guardar_partida()
+
+func comprar_vida() -> bool:
+	if vidas >= 3:
+		return false
+
+	if compras_vidas >= precios_vidas.size():
+		return false
+
+	var precio = precios_vidas[compras_vidas]
+
+	if dinero < precio:
+		return false
+
+	dinero -= precio
+	vidas += 1
+	compras_vidas += 1
+
+	guardar_partida()
+
+	print("Vida comprada. Vidas: ", vidas)
+	print("Dinero restante: $", dinero)
+
+	return true
