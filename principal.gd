@@ -17,17 +17,12 @@ func mostrar_mensaje(texto: String) -> void:
 	etiqueta.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 
 func _ready() -> void:
-	GameManager.cargar_partida()
-	call_deferred("_restaurar_alimentos")
 	mostrar_mensaje("¡Bienvenido a Conecta Alimentos!")
 	$BotonNuevaPartida.pressed.connect(_on_boton_nueva_partida_pressed)
 	$TemporizadorNivel.timeout.connect(_on_temporizador_nivel_timeout)
 	$TemporizadorNivel.start()
 	$CanvasLayer/BotonComprarVida.pressed.connect(_on_boton_comprar_vida_pressed)
 	$CanvasLayer/ContenedorResultados/PanelResultados/BotonReiniciar.pressed.connect(_on_boton_reiniciar_pressed)
-
-func _restaurar_alimentos() -> void:
-	GameManager.cargar_partida()
 
 func _process(_delta: float) -> void:
 	var tiempo_restante = int(ceil($TemporizadorNivel.time_left))
@@ -48,6 +43,10 @@ func _process(_delta: float) -> void:
 		$CanvasLayer/BotonComprarVida.text = "Sin más compras"
 
 	if GameManager.pedido_completado() and not nivel_terminado:
+		if GameManager.nivel_desbloqueado < 2:
+			GameManager.nivel_desbloqueado = 2
+			GameManager.guardar_progreso()
+
 		pedido.text = "PEDIDO COMPLETADO"
 		terminar_nivel("¡Felicidades! ¡Nivel completado!")
 

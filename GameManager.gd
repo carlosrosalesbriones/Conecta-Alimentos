@@ -7,14 +7,15 @@ var dinero: int = 0
 var pedido_pagado: bool = false
 var vidas: int = 3
 var compras_vidas: int = 0
+var nivel_desbloqueado: int = 1
 var precios_vidas: Array[int] = [100, 250, 500, 850, 1300]
 
 func sumar_puntos(cantidad: int) -> void:
 	puntos += cantidad
-	guardar_partida()
+
 func avanzar_dia() -> void:
 	dia_actual += 1
-	guardar_partida()
+
 
 func perder_vida() -> void:
 	if vidas <= 0:
@@ -37,7 +38,6 @@ func comprobar_pedido() -> void:
 	if pedido_completado() and not pedido_pagado:
 		pedido_pagado = true
 		dinero += 100
-		guardar_partida()
 		print("Dinero actual: $", dinero)
 		get_tree().current_scene.mostrar_mensaje("¡Pedido completado! +$100")
 		print("Alimentos rescatados: ", alimentos_rescatados)
@@ -59,7 +59,8 @@ func guardar_partida() -> void:
 		"puntos": puntos,
 		"dinero": dinero,
 		"dia_actual": dia_actual,
-		"alimentos": alimentos_guardados
+		"alimentos": alimentos_guardados,
+		"nivel_desbloqueado": nivel_desbloqueado
 	}
 
 	archivo.store_var(datos)
@@ -79,6 +80,7 @@ func cargar_partida() -> void:
 	puntos = datos.get("puntos", 0)
 	dinero = datos.get("dinero", 0)
 	dia_actual = datos.get("dia_actual", 1)
+	nivel_desbloqueado = datos.get("nivel_desbloqueado", 1)
 
 	var alimentos_guardados = datos.get("alimentos", [])
 	var alimentos = get_tree().get_nodes_in_group("alimentos")
@@ -88,7 +90,8 @@ func cargar_partida() -> void:
 		alimentos[i].get_node_or_null("Label").text = "Días: " + str(alimentos[i].dias_para_caducar)
 
 func _ready() -> void:
-	cargar_partida()
+	cargar_progreso()
+	print("Nivel desbloqueado al iniciar: ", nivel_desbloqueado)
 
 func reiniciar_partida() -> void:
 	puntos = 0
@@ -106,7 +109,6 @@ func reiniciar_partida() -> void:
 		if etiqueta != null:
 			etiqueta.text = "Días: " + str(alimento.dias_para_caducar)
 
-	guardar_partida()
 
 func comprar_vida() -> bool:
 	if vidas >= 3:
@@ -124,9 +126,37 @@ func comprar_vida() -> bool:
 	vidas += 1
 	compras_vidas += 1
 
-	guardar_partida()
 
 	print("Vida comprada. Vidas: ", vidas)
 	print("Dinero restante: $", dinero)
 
 	return true
+func guardar_progreso() -> void:
+	var archivo = FileAccess.open("user://progreso.save", FileAccess.WRITE)
+
+	if archivo == null:
+		push_error("No se pudo guardar el progreso")
+		return
+
+	var datos = {
+		"nivel_desbloqueado": nivel_desbloqueado
+	}
+
+	archivo.store_var(datos)
+	archivo.close()
+func cargar_progreso() -> void:
+	if not FileAccess.file_exists("user://progreso.save"):
+		nivel_desbloqueado = 1
+		return
+
+	var archivo = FileAccess.open("user://progreso.save", FileAccess.READ)
+
+	if archivo == null:
+		push_error("No se pudo cargar el progreso")
+		return
+
+	var datos = archivo.get_var()
+	archivo.close()
+
+	if datos is Dictionary:
+		nivel_desbloqueado = max(1, int(datos.get("nivel_desbloqueado", 1)))
