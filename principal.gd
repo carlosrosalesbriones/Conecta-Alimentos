@@ -26,6 +26,8 @@ func _ready() -> void:
 	$CanvasLayer/BotonPausa.pressed.connect(_on_boton_pausa_pressed)
 	$CanvasLayer/PanelPausa/BotonContinuar.pressed.connect(_on_boton_continuar_pressed)
 	$CanvasLayer/PanelPausa/BotonVolverMenu.pressed.connect(_on_boton_volver_menu_pressed)
+	$CanvasLayer/PanelPausa/BotonInstruccionesPausa.pressed.connect(_on_boton_instrucciones_pausa_pressed)
+	$CanvasLayer/PanelInstruccionesPausa/BotonVolverInstrucciones.pressed.connect(_on_boton_volver_instrucciones_pressed)
 
 func _process(_delta: float) -> void:
 	var tiempo_restante = int(ceil($TemporizadorNivel.time_left))
@@ -109,3 +111,11 @@ func _on_boton_volver_menu_pressed() -> void:
 	get_tree().paused = false
 	GameManager.reiniciar_partida()
 	get_tree().change_scene_to_file("res://menu_principal.tscn")
+func _on_boton_instrucciones_pausa_pressed() -> void:
+	$CanvasLayer/PanelPausa.hide()
+	$CanvasLayer/PanelInstruccionesPausa.show()
+
+
+func _on_boton_volver_instrucciones_pressed() -> void:
+	$CanvasLayer/PanelInstruccionesPausa.hide()
+	$CanvasLayer/PanelPausa.show()
