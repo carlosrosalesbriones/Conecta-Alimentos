@@ -223,12 +223,14 @@ offset_bottom = 535.0
 [node name="LabelTituloResultado" type="Label" parent="CanvasLayer/ContenedorResultados/PanelResultados" unique_id=479609597]
 layout_mode = 0
 offset_left = 50.0
-offset_top = 45.0
+offset_top = 35.0
 offset_right = 450.0
-offset_bottom = 85.0
+offset_bottom = 115.0
 theme_override_font_sizes/font_size = 28
 text = "Resultado"
 horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
 
 [node name="LabelPuntosFinales" type="Label" parent="CanvasLayer/ContenedorResultados/PanelResultados" unique_id=1438811263]
 layout_mode = 0
@@ -348,6 +350,10 @@ offset_top = 535.0
 offset_right = 525.0
 offset_bottom = 575.0
 text = "VOLVER"
+
+[node name="TemporizadorMensaje" type="Timer" parent="CanvasLayer" unique_id=10160353]
+wait_time = 2.0
+one_shot = true
 
 [node name="LabelPedido" type="Label" parent="." unique_id=1003757450]
 offset_left = 20.0

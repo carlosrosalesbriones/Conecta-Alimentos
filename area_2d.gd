@@ -10,20 +10,27 @@ func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 
 func _on_body_entered(body: Node2D) -> void:
-	if body is CharacterBody2D:
-		if esta_caducado():
-			if not penalizacion_aplicada:
-				get_tree().current_scene.mostrar_mensaje("¡Este alimento está caducado! -1 vida")
-				GameManager.perder_vida()
-				penalizacion_aplicada = true
-			return
+	if not body is CharacterBody2D:
+		return
 
-		get_tree().current_scene.mostrar_mensaje("¡Alimento rescatado! +10 puntos")
-		GameManager.sumar_puntos(10)
-		GameManager.alimentos_rescatados += 1
-		GameManager.comprobar_pedido()
-		print("Puntos: ", GameManager.puntos)
-		queue_free()
+	if esta_caducado():
+		if not penalizacion_aplicada:
+			penalizacion_aplicada = true
+			GameManager.perder_vida()
+			get_tree().current_scene.mostrar_mensaje(
+				"¡Alimento caducado! -1 vida. Restantes: " + str(GameManager.vidas),
+				Color("#ff6b6b")
+				)
+		return
+
+	get_tree().current_scene.mostrar_mensaje(
+	"¡Alimento rescatado! +10 puntos",
+	Color("#86efac"))
+	GameManager.sumar_puntos(10)
+	GameManager.alimentos_rescatados += 1
+	GameManager.comprobar_pedido()
+	print("Puntos: ", GameManager.puntos)
+	queue_free()
 
 func actualizar_caducidad() -> void:
 	if dias_para_caducar > 0:

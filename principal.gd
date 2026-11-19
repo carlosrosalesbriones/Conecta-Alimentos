@@ -8,13 +8,18 @@ func _input(event: InputEvent) -> void:
 		GameManager.actualizar_alimentos()
 		print("Día actual: ", GameManager.dia_actual)
 
-func mostrar_mensaje(texto: String) -> void:
+
+func mostrar_mensaje(texto: String, color: Color = Color.WHITE) -> void:
+	if nivel_terminado:
+		return
 	var etiqueta = $CanvasLayer/Label
 	etiqueta.text = texto
+	etiqueta.add_theme_color_override("font_color", color)
 	etiqueta.visible = true
 	etiqueta.position.x = 0
 	etiqueta.size.x = 1280
 	etiqueta.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	$CanvasLayer/TemporizadorMensaje.start()
 
 func _ready() -> void:
 	mostrar_mensaje("¡Bienvenido a Conecta Alimentos!")
@@ -28,6 +33,7 @@ func _ready() -> void:
 	$CanvasLayer/PanelPausa/BotonVolverMenu.pressed.connect(_on_boton_volver_menu_pressed)
 	$CanvasLayer/PanelPausa/BotonInstruccionesPausa.pressed.connect(_on_boton_instrucciones_pausa_pressed)
 	$CanvasLayer/PanelInstruccionesPausa/BotonVolverInstrucciones.pressed.connect(_on_boton_volver_instrucciones_pressed)
+	$CanvasLayer/TemporizadorMensaje.timeout.connect(_on_temporizador_mensaje_timeout)
 
 func _process(_delta: float) -> void:
 	var tiempo_restante = int(ceil($TemporizadorNivel.time_left))
@@ -61,6 +67,7 @@ func _on_boton_nueva_partida_pressed() -> void:
 	get_tree().reload_current_scene()
 
 func _on_temporizador_nivel_timeout() -> void:
+	$CanvasLayer/LabelTiempo.text = "00:00"
 	terminar_nivel("¡Se acabó el tiempo! Nivel perdido")
 
 func terminar_nivel(mensaje: String) -> void:
@@ -68,6 +75,9 @@ func terminar_nivel(mensaje: String) -> void:
 		return
 
 	nivel_terminado = true
+	$CanvasLayer/LabelVidas.text = "Vidas: " + str(GameManager.vidas)
+	$CanvasLayer/TemporizadorMensaje.stop()
+	$CanvasLayer/Label.hide()
 	$TemporizadorNivel.stop()
 	$TemporizadorCaducidad.stop()
 
@@ -119,3 +129,5 @@ func _on_boton_instrucciones_pausa_pressed() -> void:
 func _on_boton_volver_instrucciones_pressed() -> void:
 	$CanvasLayer/PanelInstruccionesPausa.hide()
 	$CanvasLayer/PanelPausa.show()
+func _on_temporizador_mensaje_timeout() -> void:
+	$CanvasLayer/Label.hide()
